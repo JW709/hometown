@@ -12,11 +12,13 @@ app.use(cors());
 
 app.use('/posts', postRoutes)
 
+app.get('/', (req, res) => {
+    res.send("Explore Your Home Town")
+})
 
-const CONNECTION_URL = 'mongodb+srv://jessw:mongodb123@cluster0.35ok3.mongodb.net/test';
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(CONNECTION_URL)
+mongoose.connect(process.env.CONNECTION_URL)
     .then(() => app.listen(PORT, () => console.log(`Server running on ${PORT}`)))
     .catch((error) => console.log(error.message));
 
