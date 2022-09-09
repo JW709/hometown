@@ -1,43 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './styles'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, TextField, Button, Paper, Grid } from '@material-ui/core';
 import FileBase from 'react-file-base64';
-import { createPost } from '../../actions/posts';
+import { createPost, updatePost } from '../../actions/posts'; 
 
+const PostForm = ({ currentId, setCurrentId }) => {
 
-const PostForm = () => {
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+
     const classes = useStyles();
     const [postData, setPostData] = useState({
-        user: '',
+        title: '',
         caption: '',
         tags: '',
         selectedFile: ''
     });
-    console.log(postData)
+
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createPost(postData));
+
+        if (currentId) {
+            dispatch(updatePost(currentId, postData))
+        }  else {
+            dispatch(createPost(postData));
+        };
+        clear()
     };
 
     const clear = () => {
-
+        setCurrentId(null);
+        setPostData({
+            user: '',
+            caption: '',
+            tags: '',
+            selectedFile: ''
+        });
     };
+
+    useEffect(() => {
+        if (post) {
+            setPostData(post);
+        }
+    }, [post])
 
     return(
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h6">Add Menu</Typography>
-                <TextField 
+                <Typography variant="h6">{currentId ? 'Edit Post' : 'Add Post'}</Typography>
+                {/* <TextField 
                     name="user" 
                     label="Business" 
                     variant="standard" 
                     value={postData.user}
                     fullWidth
                     onChange={(e) => setPostData({ ...postData, user: e.target.value })}
-                    />
+                    /> */}
 
                 <TextField 
                     name="title" 
@@ -63,18 +83,12 @@ const PostForm = () => {
                     variant="standard" 
                     value={postData.tags}
                     fullWidth
-                    onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+                    onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',')})}
                     />
 
-                <div className={classes.fileInput}>
-                    <FileBase 
-                        type="file"
-                        multiple="true"
-                        onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
-                    />
-                </div>
+                <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
 
-                <Button className={classes.submit} color="primary" type="submit" fullWidth>Add Menu</Button>                
+                <Button className={classes.submit} color="primary" type="submit" fullWidth>Post</Button>                
                 <Button color="secondary" onClick={clear} fullWidth>Cancel</Button>                
 
             </form>
