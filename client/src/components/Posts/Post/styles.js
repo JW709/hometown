@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles({
+export default makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '56.25%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: theme.palette.grey[400],
     backgroundBlendMode: 'darken',
   },
   border: {
@@ -18,8 +18,8 @@ export default makeStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderRadius: '15px',
-    height: '100%',
     position: 'relative',
+    marginBottom: theme.spacing(2)
   },
   overlay: {
     position: 'absolute',
@@ -49,4 +49,4 @@ export default makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
-});
+}));

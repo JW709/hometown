@@ -15,7 +15,10 @@ const postSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     }
-})
+});
+
+// Media model 
+// with endpoint 
 
 const PostMessage = mongoose.model('PostMessage', postSchema);
 

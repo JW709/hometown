@@ -33,7 +33,7 @@ const PostForm = ({ currentId, setCurrentId }) => {
     const clear = () => {
         setCurrentId(null);
         setPostData({
-            user: '',
+            title: '',
             caption: '',
             tags: '',
             selectedFile: ''
@@ -86,6 +86,7 @@ const PostForm = ({ currentId, setCurrentId }) => {
                     onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',')})}
                     />
 
+                {/* TODO: Add Dropzone with img preview */}
                 <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
 
                 <Button className={classes.submit} color="primary" type="submit" fullWidth>Post</Button>                

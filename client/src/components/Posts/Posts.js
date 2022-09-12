@@ -13,16 +13,14 @@ const Posts = ({ setCurrentId }) => {
 
     return(
          
-            <Grid className={classes.container} container spacing={3}>
+            // <Grid className={classes.container} container spacing={3}>
 
-                {posts.map((post) => (
-                    <Grid item key={post._id}>
-                        <Post setCurrentId={setCurrentId} post={post} />
-                    </Grid>
-                ))}
+                posts.map((post) => (
+                        <Post key={post._id} setCurrentId={setCurrentId} post={post} />
+                ))
 
 
-            </Grid>
+            // </Grid>
         
 
     )

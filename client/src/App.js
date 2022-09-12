@@ -27,13 +27,15 @@ const App = () => {
 
       </AppBar>
       <Grow in>
-          <Grid container spacing={3} styles={{ justify: "space-between" }}>
-            <Grid item xs={12} sm={7}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={8}>
               <Posts setCurrentId={setCurrentId}/>
             </Grid>
 
-            <Grid item xs={12} sm={4}>
-              <PostForm currentId={currentId} setCurrentId={setCurrentId} />
+            <Grid item xs={12} sm={4} >
+              <div style={{ position: 'sticky', top: 12 }}>
+                <PostForm currentId={currentId} setCurrentId={setCurrentId} />
+              </div>
             </Grid>
             
           </Grid>
