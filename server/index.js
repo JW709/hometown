@@ -6,7 +6,7 @@ import postRoutes from './routes/posts.js'
 
 const app = express();
 
-app.use(bodyParser.json({ extended: true }));
+app.use(bodyParser.json({ extended: true, limit: 100000000 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
