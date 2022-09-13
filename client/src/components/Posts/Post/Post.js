@@ -22,7 +22,7 @@ const Post = ({ post, setCurrentId }) => {
             </div>
 
             <div className={classes.overlay2}>
-                <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
+                <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="medium" /></Button>
             </div>
 
             <div className={classes.details}>
@@ -30,7 +30,7 @@ const Post = ({ post, setCurrentId }) => {
                 </Typography>
 
                 <CardContent>
-                    <Typography className={classes.title} variant="body2" color="text-secondary" gutterBottom>{post.caption}
+                    <Typography className={classes.title} variant="body2" color="textSecondary" gutterBottom>{post.caption}
                     </Typography>
                 </CardContent>
 
