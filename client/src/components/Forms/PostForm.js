@@ -3,7 +3,9 @@ import useStyles from './styles'
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, TextField, Button, Paper, Grid } from '@material-ui/core';
 import FileBase from 'react-file-base64';
-import { createPost, updatePost } from '../../actions/posts'; 
+import { createPost, updatePost } from '../../actions/posts';
+
+// Add Fab when mobile detected
 
 const PostForm = ({ currentId, setCurrentId }) => {
 
@@ -24,7 +26,7 @@ const PostForm = ({ currentId, setCurrentId }) => {
 
         if (currentId) {
             dispatch(updatePost(currentId, postData))
-        }  else {
+        } else {
             dispatch(createPost(postData));
         };
         clear()
@@ -46,7 +48,7 @@ const PostForm = ({ currentId, setCurrentId }) => {
         }
     }, [post])
 
-    return(
+    return (
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">{currentId ? 'Edit Post' : 'Add Post'}</Typography>
@@ -59,38 +61,40 @@ const PostForm = ({ currentId, setCurrentId }) => {
                     onChange={(e) => setPostData({ ...postData, user: e.target.value })}
                     /> */}
 
-                <TextField 
-                    name="title" 
-                    label="Title" 
-                    variant="standard" 
+                <TextField
+                    name="title"
+                    label="Title"
+                    variant="standard"
                     value={postData.title}
                     fullWidth
                     onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-                    />
+                />
 
-                <TextField 
-                    name="caption" 
-                    label="Caption" 
-                    variant="standard" 
+                <TextField
+                    name="caption"
+                    label="Caption"
+                    variant="standard"
                     value={postData.caption}
                     fullWidth
                     onChange={(e) => setPostData({ ...postData, caption: e.target.value })}
-                    />   
+                />
 
-                <TextField 
-                    name="tage" 
-                    label="Tags" 
-                    variant="standard" 
+                <TextField
+                    name="tage"
+                    label="Tags"
+                    variant="standard"
                     value={postData.tags}
                     fullWidth
-                    onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',')})}
-                    />
+                    onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
+                />
 
                 {/* TODO: Add Dropzone with img preview */}
-                <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
+                <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => {
+                    setPostData({ ...postData, selectedFile: base64 })
+                }} /></div>
 
-                <Button className={classes.submit} color="primary" type="submit" fullWidth>Post</Button>                
-                <Button color="secondary" onClick={clear} fullWidth>Cancel</Button>                
+                <Button className={classes.submit} color="primary" type="submit" fullWidth>Post</Button>
+                <Button color="secondary" onClick={clear} fullWidth>Cancel</Button>
 
             </form>
 

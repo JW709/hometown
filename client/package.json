@@ -23,7 +23,9 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +50,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.7.16"
+    "@types/node": "^18.7.16",
+    "gh-pages": "^4.0.0"
   }
 }

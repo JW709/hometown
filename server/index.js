@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-const CONNECTION_URL = 'mongodb+srv://jessw:mongodb123@cluster0.35ok3.mongodb.net/test';
+const CONNECTION_URL = process.env.MONGODB_URI || 'mongodb+srv://jessw:mongodb123@cluster0.35ok3.mongodb.net/test';
 
 mongoose.connect(CONNECTION_URL)
     .then(() => app.listen(PORT, () => console.log('Server running')))

@@ -8,30 +8,28 @@ import moment from 'moment-timezone'
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../actions/posts';
 
- 
-const Post = ({ post, setCurrentId}) => {
+
+const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    
-    console.log(post)
 
-    return(
-        <Card className={classes.card}> 
+    return (
+        <Card className={classes.card}>
             <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
-             <div className={classes.overlay}>
+            <div className={classes.overlay}>
                 <Typography variant="h6">{post.title}</Typography>
                 <Typography>{moment(post.createdAt).fromNow()}</Typography>
             </div>
-            
+
             <div className={classes.overlay2}>
                 <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
             </div>
-            
+
             <div className={classes.details}>
                 <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}
                 </Typography>
 
-                 <CardContent>
+                <CardContent>
                     <Typography className={classes.title} variant="body2" color="text-secondary" gutterBottom>{post.caption}
                     </Typography>
                 </CardContent>
@@ -47,10 +45,8 @@ const Post = ({ post, setCurrentId}) => {
 
                     <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> Delete</Button>
 
-                </CardActions> 
-
-
-            </div> 
+                </CardActions>
+            </div>
 
         </Card>
     )

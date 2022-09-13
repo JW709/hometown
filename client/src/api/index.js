@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const url = 'http://localhost:5000/posts'
+const API_URL = (process.env.REACT_APP_API_URL || 'http://localhost:5000').replace(/\/+$/, '')
+
+const url = `${API_URL}/posts`
 
 
 export const fetchPosts = () => axios.get(url);
